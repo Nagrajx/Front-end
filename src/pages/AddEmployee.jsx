@@ -28,7 +28,7 @@ const AddEmployee = () => {
 
     try {
       const response = await employee.post(
-        "/add",
+        "/employee/add",
         formData
       );
 
