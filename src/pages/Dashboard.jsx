@@ -20,7 +20,7 @@ const Dashboard = () => {
   const getStats = async () => {
     try {
       const employeeResponse = await employee.get("/employee/all");
-      const customerResponse = await customer.get("customer/all");
+      const customerResponse = await customer.get("/customer/all");
 
 
       setTotalEmployees(employeeResponse.data.count);

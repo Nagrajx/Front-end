@@ -8,7 +8,7 @@ const CustomerList = () => {
 
   const getCustomers = async () => {
     try {
-      const response = await customer.get("/all");
+      const response = await customer.get("/customer/all");
 
       setCustomers(response.data.customers);
     } catch (error) {

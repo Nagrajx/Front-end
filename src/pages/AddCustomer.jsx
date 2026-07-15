@@ -25,7 +25,7 @@ const AddCustomer = () => {
     e.preventDefault();
 
     try {
-      const response = await customer.post("/add", formData);
+      const response = await customer.post("/customer/add", formData);
 
       toast.success(
         response.data.message || "Customer Added Successfully"
