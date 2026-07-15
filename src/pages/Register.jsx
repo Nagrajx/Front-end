@@ -14,7 +14,6 @@ function Register() {
 
   const [loading, setLoading] = useState(false);
 
-  // Handle Input Change
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -22,7 +21,6 @@ function Register() {
     }));
   };
 
-  // Handle Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -37,14 +35,12 @@ function Register() {
 
       toast.success(response.data.message || "Registration Successful");
 
-      // Clear Form
       setFormData({
         name: "",
         email: "",
         password: "",
       });
 
-      // Redirect to Login Page
       navigate("/login");
     } catch (err) {
       toast.error(
@@ -56,10 +52,10 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-[400px]">
-
-        <h1 className="text-3xl font-bold text-center mb-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-6">
+      <div className="w-full max-w-md bg-white shadow-xl rounded-xl p-6 sm:p-8">
+        
+        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">
           Register
         </h1>
 
@@ -67,7 +63,7 @@ function Register() {
 
           {/* Name */}
           <div>
-            <label className="block mb-1 font-medium">
+            <label className="block mb-1 font-medium text-sm sm:text-base">
               Name
             </label>
 
@@ -77,13 +73,13 @@ function Register() {
               placeholder="Enter your name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full border rounded-md p-2 outline-none focus:border-blue-500"
+              className="w-full border rounded-lg p-3 outline-none focus:border-blue-500"
             />
           </div>
 
           {/* Email */}
           <div>
-            <label className="block mb-1 font-medium">
+            <label className="block mb-1 font-medium text-sm sm:text-base">
               Email
             </label>
 
@@ -93,13 +89,13 @@ function Register() {
               placeholder="Enter your email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full border rounded-md p-2 outline-none focus:border-blue-500"
+              className="w-full border rounded-lg p-3 outline-none focus:border-blue-500"
             />
           </div>
 
           {/* Password */}
           <div>
-            <label className="block mb-1 font-medium">
+            <label className="block mb-1 font-medium text-sm sm:text-base">
               Password
             </label>
 
@@ -109,7 +105,7 @@ function Register() {
               placeholder="Enter your password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full border rounded-md p-2 outline-none focus:border-blue-500"
+              className="w-full border rounded-lg p-3 outline-none focus:border-blue-500"
             />
           </div>
 
@@ -117,18 +113,18 @@ function Register() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium"
           >
             {loading ? "Registering..." : "Register"}
           </button>
 
         </form>
 
-        <p className="text-center mt-5">
+        <p className="text-center mt-5 text-sm sm:text-base">
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-blue-600 hover:underline"
+            className="text-blue-600 hover:underline font-medium"
           >
             Login
           </Link>

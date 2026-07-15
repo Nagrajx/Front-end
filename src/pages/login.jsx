@@ -32,7 +32,7 @@ const Login = () => {
 
       const response = await api.post(
         "/auth/login",
-        formData,
+        formData
       );
 
       console.log(response.data);
@@ -60,9 +60,10 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-[400px]">
-        <h1 className="text-3xl font-bold text-center mb-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-6">
+      <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-xl shadow-xl">
+        
+        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">
           Login
         </h1>
 
@@ -71,7 +72,7 @@ const Login = () => {
           className="space-y-4"
         >
           <div>
-            <label className="block mb-1">
+            <label className="block mb-1 font-medium text-sm sm:text-base">
               Email
             </label>
 
@@ -81,12 +82,12 @@ const Login = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter Email"
-              className="w-full border p-2 rounded"
+              className="w-full border rounded-lg p-3 outline-none focus:border-blue-500"
             />
           </div>
 
           <div>
-            <label className="block mb-1">
+            <label className="block mb-1 font-medium text-sm sm:text-base">
               Password
             </label>
 
@@ -96,24 +97,24 @@ const Login = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter Password"
-              className="w-full border p-2 rounded"
+              className="w-full border rounded-lg p-3 outline-none focus:border-blue-500"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium"
           >
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
-        <p className="text-center mt-4">
+        <p className="text-center mt-5 text-sm sm:text-base">
           Don't have an account?{" "}
           <Link
             to="/register"
-            className="text-blue-600"
+            className="text-blue-600 hover:underline font-medium"
           >
             Register
           </Link>

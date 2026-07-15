@@ -15,7 +15,6 @@ const EditEmployee = () => {
     designation: "",
   });
 
-
   // Get Employee By Id
   const getEmployee = async () => {
     try {
@@ -30,17 +29,19 @@ const EditEmployee = () => {
         department: emp.department,
         designation: emp.designation,
       });
-
     } catch (error) {
       console.log(error.response?.data || error.message);
+
+      toast.error(
+        error.response?.data?.message ||
+          "Failed to load employee"
+      );
     }
   };
-
 
   useEffect(() => {
     getEmployee();
   }, [id]);
-
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -48,7 +49,6 @@ const EditEmployee = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,104 +59,98 @@ const EditEmployee = () => {
         formData
       );
 
-
       toast.success(
         response.data.message ||
-        "Employee Updated Successfully"
+          "Employee Updated Successfully"
       );
 
-
       navigate("/employees");
-
-
     } catch (error) {
       console.log(error.response?.data || error.message);
 
       toast.error(
         error.response?.data?.message ||
-        "Update Failed"
+          "Update Failed"
       );
     }
   };
 
-
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white shadow-lg p-6 rounded-lg">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-6">
+      <div className="w-full max-w-lg bg-white shadow-xl rounded-xl p-6 sm:p-8">
 
-      <h2 className="text-2xl font-bold mb-5">
-        Edit Employee
-      </h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6">
+          Edit Employee
+        </h2>
 
-
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-4"
-      >
-
-
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Name"
-          className="w-full border p-2 rounded"
-        />
-
-
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email"
-          className="w-full border p-2 rounded"
-        />
-
-
-        <input
-          type="text"
-          name="mobile"
-          value={formData.mobile}
-          onChange={handleChange}
-          placeholder="Mobile"
-          className="w-full border p-2 rounded"
-        />
-
-
-        <input
-          type="text"
-          name="department"
-          value={formData.department}
-          onChange={handleChange}
-          placeholder="Department"
-          className="w-full border p-2 rounded"
-        />
-
-
-        <input
-          type="text"
-          name="designation"
-          value={formData.designation}
-          onChange={handleChange}
-          placeholder="Designation"
-          className="w-full border p-2 rounded"
-        />
-
-
-        <button
-          type="submit"
-          className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4"
         >
-          Update Employee
-        </button>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Name"
+            className="w-full border rounded-lg p-3 outline-none focus:border-green-500"
+          />
 
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+            className="w-full border rounded-lg p-3 outline-none focus:border-green-500"
+          />
 
-      </form>
+          <input
+            type="text"
+            name="mobile"
+            value={formData.mobile}
+            onChange={handleChange}
+            placeholder="Mobile"
+            className="w-full border rounded-lg p-3 outline-none focus:border-green-500"
+          />
 
+          <input
+            type="text"
+            name="department"
+            value={formData.department}
+            onChange={handleChange}
+            placeholder="Department"
+            className="w-full border rounded-lg p-3 outline-none focus:border-green-500"
+          />
+
+          <input
+            type="text"
+            name="designation"
+            value={formData.designation}
+            onChange={handleChange}
+            placeholder="Designation"
+            className="w-full border rounded-lg p-3 outline-none focus:border-green-500"
+          />
+
+          <button
+            type="submit"
+            className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-medium"
+          >
+            Update Employee
+          </button>
+
+          <button
+            type="button"
+            onClick={() => navigate("/employees")}
+            className="w-full bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 transition"
+          >
+            Back to Employees
+          </button>
+        </form>
+
+      </div>
     </div>
   );
 };
-
 
 export default EditEmployee;

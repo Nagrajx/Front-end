@@ -25,100 +25,115 @@ const AddCustomer = () => {
     e.preventDefault();
 
     try {
-      const response = await customer.post("/add", formData);
+      const response = await customer.post(
+        "/add",
+        formData
+      );
 
       toast.success(
-        response.data.message || "Customer Added Successfully"
+        response.data.message ||
+          "Customer Added Successfully"
       );
 
       navigate("/customers");
-
     } catch (error) {
-      console.log(error.response?.data || error.message);
+      console.log(
+        error.response?.data || error.message
+      );
 
       toast.error(
-        error.response?.data?.message || "Failed to add customer"
+        error.response?.data?.message ||
+          "Failed to add customer"
       );
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white shadow-lg p-6 rounded-lg">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-6">
+      <div className="w-full max-w-lg bg-white shadow-xl rounded-xl p-6 sm:p-8">
 
-      <h2 className="text-2xl font-bold mb-5">
-        Add Customer
-      </h2>
-
-      <form 
-        onSubmit={handleSubmit}
-        className="space-y-4"
-      >
-
-        <input
-          type="text"
-          name="name"
-          placeholder="Customer Name"
-          value={formData.name}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-
-        <input
-          type="text"
-          name="mobile"
-          placeholder="Mobile Number"
-          value={formData.mobile}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-
-        <input
-          type="text"
-          name="city"
-          placeholder="City"
-          value={formData.city}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-
-        <select
-          name="status"
-          value={formData.status}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-        >
-          <option value="Active">
-            Active
-          </option>
-
-          <option value="Inactive">
-            Inactive
-          </option>
-        </select>
-
-
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-        >
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6">
           Add Customer
-        </button>
+        </h2>
 
-      </form>
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4"
+        >
 
+          <input
+            type="text"
+            name="name"
+            placeholder="Customer Name"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full border rounded-lg p-3 outline-none focus:border-blue-500"
+            required
+          />
+
+          <input
+            type="text"
+            name="mobile"
+            placeholder="Mobile Number"
+            value={formData.mobile}
+            onChange={handleChange}
+            className="w-full border rounded-lg p-3 outline-none focus:border-blue-500"
+            required
+          />
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full border rounded-lg p-3 outline-none focus:border-blue-500"
+            required
+          />
+
+          <input
+            type="text"
+            name="city"
+            placeholder="City"
+            value={formData.city}
+            onChange={handleChange}
+            className="w-full border rounded-lg p-3 outline-none focus:border-blue-500"
+            required
+          />
+
+          <select
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            className="w-full border rounded-lg p-3 outline-none focus:border-blue-500"
+          >
+            <option value="Active">
+              Active
+            </option>
+
+            <option value="Inactive">
+              Inactive
+            </option>
+          </select>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium"
+          >
+            Add Customer
+          </button>
+
+          <button
+            type="button"
+            onClick={() => navigate("/customers")}
+            className="w-full bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 transition"
+          >
+            Back to Customers
+          </button>
+
+        </form>
+
+      </div>
     </div>
   );
 };

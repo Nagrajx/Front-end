@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import customer from "../services/customerApi";
+import toast from "react-hot-toast";
 
 const EditCustomer = () => {
   const { id } = useParams();
@@ -30,6 +31,11 @@ const EditCustomer = () => {
       });
     } catch (error) {
       console.log(error);
+
+      toast.error(
+        error.response?.data?.message ||
+          "Failed to fetch customer"
+      );
     }
   };
 
@@ -43,56 +49,78 @@ const EditCustomer = () => {
     try {
       await customer.put(`/update/${id}`, formData);
 
+      toast.success("Customer Updated Successfully");
+
       navigate("/customers");
     } catch (error) {
       console.log(error);
+
+      toast.error(
+        error.response?.data?.message ||
+          "Update Failed"
+      );
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white shadow-md p-6 rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">
-        Update Customer
-      </h2>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-6">
+      <div className="w-full max-w-lg bg-white shadow-xl rounded-xl p-6 sm:p-8">
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-
-        <input
-          type="text"
-          name="phone"
-          placeholder="Phone"
-          value={formData.phone}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-
-        <button
-          type="submit"
-          className="w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-        >
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6">
           Update Customer
-        </button>
-      </form>
+        </h2>
+
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4"
+        >
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full border rounded-lg p-3 outline-none focus:border-green-500"
+            required
+          />
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full border rounded-lg p-3 outline-none focus:border-green-500"
+            required
+          />
+
+          <input
+            type="text"
+            name="phone"
+            placeholder="Phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className="w-full border rounded-lg p-3 outline-none focus:border-green-500"
+            required
+          />
+
+          <button
+            type="submit"
+            className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-medium"
+          >
+            Update Customer
+          </button>
+
+          <button
+            type="button"
+            onClick={() => navigate("/customers")}
+            className="w-full bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 transition"
+          >
+            Back to Customers
+          </button>
+        </form>
+
+      </div>
     </div>
   );
 };
