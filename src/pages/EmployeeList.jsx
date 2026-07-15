@@ -29,7 +29,7 @@ const EmployeeList = () => {
   const deleteEmployee = async (id) => {
     try {
       const response = await employee.delete(
-        `/employee/delete/${id}`
+        `/delete/${id}`
       );
 
       toast.success(
